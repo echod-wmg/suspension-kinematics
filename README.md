@@ -191,6 +191,8 @@ height **141.64 mm**, upper/lower arm angles **6.93° / −3.53°**.
 * **2020**: BEng (Hons) Automotive Engineering individual project, Coventry
   University. Excel tool for double wishbone and McPherson kinematics,
   validated against MSC ADAMS.
+  [Report (PDF)](docs/report/2020_BEng_report_suspension_kinematics.pdf) ·
+  [Presentation (PDF)](docs/report/2020_BEng_presentation_suspension_kinematics.pdf)
 * **2026**: rewritten as this Python package. It adds the exact 3-D solver,
   the MacPherson strut, tie-rod steering, more metrics, tests and CI.
 
