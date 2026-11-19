@@ -56,6 +56,19 @@ suspkin sweep examples/excel_default_2020.json --travel -150 150 5
 suspkin hardpoints examples/excel_default_2020.json     # convert legacy Excel inputs to 3-D hardpoints
 ```
 
+### Interactive explorer
+
+```bash
+pip install -e ".[app]"
+streamlit run app/streamlit_app.py
+```
+
+Pick an example, edit hardpoints and wheel data in the sidebar, and move the
+travel and steer sliders. Metrics, the three-view geometry and the bump,
+steer and roll sweeps update live. Edited models can be downloaded as JSON.
+
+![Interactive explorer](docs/img/explorer_app.png)
+
 ### Python
 
 ```python
