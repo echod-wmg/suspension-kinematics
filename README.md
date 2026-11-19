@@ -1,6 +1,6 @@
 # suspkin: suspension kinematics in Python
 
-[![tests](https://github.com/Chodowi2021/suspension-kinematics/actions/workflows/tests.yml/badge.svg)](https://github.com/Chodowi2021/suspension-kinematics/actions/workflows/tests.yml)
+[![tests](https://github.com/echod-wmg/suspension-kinematics/actions/workflows/tests.yml/badge.svg)](https://github.com/echod-wmg/suspension-kinematics/actions/workflows/tests.yml)
 
 `suspkin` computes the 3-D kinematics of **double wishbone** and **MacPherson
 strut** suspensions: camber, toe / bump steer, caster, kingpin inclination,
@@ -37,7 +37,7 @@ while placing the upper ball joint.*
 ## Install
 
 ```bash
-git clone https://github.com/Chodowi2021/suspension-kinematics.git
+git clone https://github.com/echod-wmg/suspension-kinematics.git
 cd suspension-kinematics
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
