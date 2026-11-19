@@ -1,0 +1,15 @@
+{
+  "_comment": "Generic passenger-car front MacPherson strut (left corner). x forward, y outboard, z up, mm. Ground at z = 0.",
+  "type": "macpherson",
+  "hardpoints": {
+    "lower_front_pivot": [0.0, 380.0, 190.0],
+    "lower_rear_pivot":  [-300.0, 400.0, 195.0],
+    "lower_ball_joint":  [5.0, 720.0, 165.0],
+    "strut_lower":       [-15.0, 680.0, 420.0],
+    "strut_top_mount":   [-30.0, 600.0, 720.0],
+    "tie_rod_inner":     [-150.0, 330.0, 267.5],
+    "tie_rod_outer":     [-140.0, 690.0, 260.0],
+    "wheel_centre":      [0.0, 750.0, 310.0]
+  },
+  "wheel": {"radius": 310.0, "width": 205.0, "static_camber_deg": -0.5, "static_toe_deg": 0.1}
+}

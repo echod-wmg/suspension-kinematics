@@ -1,0 +1,19 @@
+{
+  "_comment": "Double wishbone model used in the 2020 report to validate the Excel tool against MSC ADAMS (report Fig. 35). Original spreadsheet inputs; wheel travel is measured at the lower ball joint, as in the ADAMS run.",
+  "type": "excel_double_wishbone",
+  "travel_reference": "lower_ball_joint",
+  "parameters": {
+    "chassis_upper_width": 753,
+    "chassis_lower_width": 400,
+    "chassis_lower_height": 200,
+    "chassis_upper_height": 350,
+    "upper_arm_length": 325,
+    "upper_arm_width": 200,
+    "lower_arm_length": 500,
+    "lower_arm_width": 200,
+    "knuckle_length": 220,
+    "rim_diameter_in": 18,
+    "tyre_width": 225,
+    "tyre_aspect_ratio": 45
+  }
+}

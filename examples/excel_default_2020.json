@@ -1,0 +1,19 @@
+{
+  "_comment": "Default inputs found in the 2020 'Suspension tool.xlsx' Double Wishbone sheet (caster 4 deg).",
+  "type": "excel_double_wishbone",
+  "parameters": {
+    "chassis_upper_width": 800,
+    "chassis_lower_width": 400,
+    "chassis_lower_height": 200,
+    "chassis_upper_height": 325,
+    "upper_arm_length": 425,
+    "upper_arm_width": 300,
+    "lower_arm_length": 625,
+    "lower_arm_width": 350,
+    "knuckle_length": 170,
+    "rim_diameter_in": 17,
+    "tyre_width": 225,
+    "tyre_aspect_ratio": 45,
+    "caster_deg": 4
+  }
+}
