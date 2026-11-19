@@ -1,11 +1,9 @@
-"""Re-run the 2020 ADAMS validation case with the exact solver.
+"""Validate the suspkin solver against MSC ADAMS.
 
 Usage:  python validation/validate_adams.py
 
-Compares, against the MSC ADAMS camber curve reported in 2020:
-  * the camber values the 2020 Excel tool reported (from the report table),
-  * this repository's re-implementation of the Excel approximation,
-  * the exact 3-D loop-closure solver in ``suspkin``.
+Compares the camber curve from ``suspkin`` with the MSC ADAMS results for the
+same double wishbone model.
 
 Writes ``validation/adams_comparison.csv`` and ``docs/img/validation_adams.png``.
 """
@@ -46,15 +44,13 @@ def plot(table: pd.DataFrame, path: Path) -> None:
     fig, (ax, ax2) = plt.subplots(1, 2, figsize=(11, 4.4))
     sweep = np.linspace(-165, 161, 200)
     model = load_model(CONFIG)
-    excel = ExcelDoubleWishbone(**load_config(CONFIG)["parameters"])
     ax.plot(
         [all_metrics(model.solve(x))["camber_change_deg"] for x in sweep],
         sweep,
         color="tab:blue",
-        label="suspkin (exact)",
+        label="suspkin",
     )
-    ax.plot(excel.excel_camber(sweep), sweep, "--", color="tab:orange", label="2020 Excel formula")
-    ax.plot(table["adams_camber_deg"], table["adams_displacement_mm"], "ko", ms=4, label="MSC ADAMS (2020)")
+    ax.plot(table["adams_camber_deg"], table["adams_displacement_mm"], "ko", ms=4, label="MSC ADAMS")
     ax.set_xlabel("Camber [deg]")
     ax.set_ylabel("Lower ball joint travel [mm]")
     ax.set_title("Camber vs wheel travel")
@@ -67,20 +63,10 @@ def plot(table: pd.DataFrame, path: Path) -> None:
         "o-",
         color="tab:blue",
         ms=4,
-        label="suspkin - ADAMS",
-    )
-    ax2.plot(
-        table["excel_formula_error_deg"],
-        table["adams_displacement_mm"],
-        "s--",
-        color="tab:orange",
-        ms=4,
-        label="Excel - ADAMS",
     )
     ax2.set_xlabel("Camber error vs ADAMS [deg]")
-    ax2.set_title("Error")
+    ax2.set_title("Error (suspkin - ADAMS)")
     ax2.grid(alpha=0.3)
-    ax2.legend()
     fig.tight_layout()
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path, dpi=130)
@@ -93,4 +79,3 @@ if __name__ == "__main__":
     print(t.round(3).to_string(index=False))
     print()
     print(f"max |error| suspkin vs ADAMS: {t['suspkin_error_deg'].abs().max():.3f} deg")
-    print(f"max |error| Excel   vs ADAMS: {t['excel_formula_error_deg'].abs().max():.3f} deg")

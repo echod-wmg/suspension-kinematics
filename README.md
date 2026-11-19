@@ -7,32 +7,15 @@ strut** suspensions: camber, toe / bump steer, caster, kingpin inclination,
 scrub radius, mechanical trail, half-track change, wheel recession and the
 front-view roll centre. It covers bump/rebound, steering and body-roll sweeps.
 
-It started as my 2020 BEng individual project at Coventry University,
+It comes from my 2020 BEng individual project at Coventry University,
 *"Design of a tool for kinematics development of the double wishbone and
-McPherson suspension systems"*. The original tool was an Excel workbook built
-on chained trigonometric approximations, and I validated it against MSC ADAMS.
-This repository is a ground-up rewrite as a tested Python package with an
-exact constraint solver. The original workbook is kept in [`legacy/`](legacy/).
+McPherson suspension systems"*. The original Excel tool is kept in
+[`legacy/`](legacy/).
 
 ![Validation against ADAMS](docs/img/validation_adams.png)
 
-*The 2020 ADAMS validation case, re-run. The exact solver agrees with ADAMS to
-within **0.015°** over ±160 mm of travel. The original spreadsheet formula
-drifts to **1.0°** at full bump because it assumed the knuckle stays vertical
-while placing the upper ball joint.*
-
-## What changed since the 2020 Excel tool
-
-| | 2020 Excel tool | `suspkin` |
-|---|---|---|
-| Model | 2-D front view + separate side/top views | Full 3-D hardpoints |
-| Method | Chained trig approximations per cell | Exact loop closure: rigid knuckle, Gauss-Newton on 6 DOF |
-| Accuracy vs ADAMS | up to 1.0° camber error | < 0.015° |
-| Steering / toe | Wheel rotated directly by the toe/steer angle | Real tie rod and rack, so bump steer is an output |
-| McPherson | Work in progress | Strut modelled as a sliding line constraint through the top mount |
-| Outputs | Camber, HTC, WR plots | + toe, caster, KPI, scrub, trail, roll-centre height and migration, strut length |
-| Inputs | Parametric (widths, lengths) | Hardpoints in JSON, plus the old parametric inputs via `ExcelDoubleWishbone` |
-| Testing | Manual | 80+ pytest checks, CI, ADAMS regression |
+*Camber against wheel travel, compared with MSC ADAMS. The solver agrees
+with ADAMS to within **0.015°** over ±160 mm of travel.*
 
 ## Install
 
@@ -161,20 +144,11 @@ contact patch through that instant centre crosses the vehicle centreline.
 
 ## Validation
 
-`python validation/validate_adams.py` re-runs the 2020 ADAMS case
-(`examples/adams_validation_2020.json`, the report's Fig. 35 inputs). It
-compares three curves against the ADAMS camber data in
-`validation/adams_2020_table1.csv`:
-
-* the exact solver: max error **0.015°**, about the rounding of the published
-  ADAMS values;
-* this repo's re-implementation of the spreadsheet formula, which reproduces
-  the Excel values the 2020 report published: max error **1.0°**;
-* an independent closed-form planar 4-bar solution, checked in `tests/` to
-  1e-8 mm.
-
-The static values also match the report: track **1398.0 mm**, roll-centre
-height **141.64 mm**, upper/lower arm angles **6.93° / −3.53°**.
+`python validation/validate_adams.py` runs the ADAMS validation case
+(`examples/adams_validation_2020.json`) and compares camber against the ADAMS
+results in `validation/adams_2020_table1.csv`. The maximum error is
+**0.015°**, about the rounding of the ADAMS values. The test suite also checks
+the solver against a closed-form planar four-bar solution to 1e-8 mm.
 
 ## Limitations
 
@@ -193,8 +167,8 @@ height **141.64 mm**, upper/lower arm angles **6.93° / −3.53°**.
   validated against MSC ADAMS.
   [Report (PDF)](docs/report/2020_BEng_report_suspension_kinematics.pdf) ·
   [Presentation (PDF)](docs/report/2020_BEng_presentation_suspension_kinematics.pdf)
-* **2026**: rewritten as this Python package. It adds the exact 3-D solver,
-  the MacPherson strut, tie-rod steering, more metrics, tests and CI.
+* **2026**: Python package with a 3-D solver, interactive explorer, tests
+  and CI.
 
 ## License
 
